@@ -1,4 +1,4 @@
-package com.nuevatel.smppsim;
+package com.nuevatel.smpp.sim;
 
 /**
  * Hello world!
