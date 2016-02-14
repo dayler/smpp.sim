@@ -78,7 +78,7 @@
                 <archive>
                   <manifest>
                     <addClasspath>true</addClasspath>
-                    <mainClass>com.nuevatel.mcsim.server.ServerApp</mainClass>
+                    <!--  <mainClass>com.nuevatel.mcsim.server.ServerApp</mainClass> -->
                   </manifest>
                 </archive>
                 <outputDirectory>../build</outputDirectory>
@@ -150,6 +150,31 @@
             </execution>
           </executions>
         </plugin>
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        <plugin>
+        	<groupId>org.eclipse.m2e</groupId>
+        	<artifactId>lifecycle-mapping</artifactId>
+        	<version>1.0.0</version>
+        	<configuration>
+        		<lifecycleMappingMetadata>
+        			<pluginExecutions>
+        				<pluginExecution>
+        					<pluginExecutionFilter>
+        						<groupId></groupId>
+        						<artifactId></artifactId>
+        						<versionRange>[,)</versionRange>
+        						<goals>
+        							<goal></goal>
+        						</goals>
+        					</pluginExecutionFilter>
+        					<action>
+        						<ignore></ignore>
+        					</action>
+        				</pluginExecution>
+        			</pluginExecutions>
+        		</lifecycleMappingMetadata>
+        	</configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -192,5 +217,68 @@
       </plugin>
     </plugins>
   </build>
+  
+  <dependencyManagement>
+    <dependencies>
+      <!-- Test dependencies -->
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+        <version>${mockito.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <!-- Log4J -->
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <!-- local dependencies -->
+      <dependency>
+        <groupId>com.nuevatel</groupId>
+        <artifactId>common-core</artifactId>
+        <version>${common.version}</version>
+      </dependency>
+      <!-- buildNumber dependency -->
+      <dependency>
+        <groupId>com.internetitem</groupId>
+        <artifactId>write-properties-file-maven-plugin</artifactId>
+        <version>1.0.1</version>
+        <scope>test</scope>
+      </dependency>
+      <!-- X-Stream -->
+      <dependency>
+        <groupId>com.thoughtworks.xstream</groupId>
+        <artifactId>xstream</artifactId>
+        <version>1.4.8</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.internetitem</groupId>
+      <artifactId>write-properties-file-maven-plugin</artifactId>
+    </dependency>
+  </dependencies>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <common.version>1.5-SNAPSHOT</common.version>
+    <junit.version>4.12</junit.version>
+    <mockito.version>1.10.19</mockito.version>
+    <log4j.version>2.4.1</log4j.version>
+  </properties>
   
 </project>

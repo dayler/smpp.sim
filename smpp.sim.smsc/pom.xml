@@ -7,20 +7,64 @@
     <artifactId>smpp.sim</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <groupId>com.nuevatel.smppsim</groupId>
+  
   <artifactId>smpp.sim.smsc</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>smpp.sim.smsc</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+  
+  <build>
+    <plugins>
+      <!-- indicates main function to execute. This plugin cannot be on Plugin Mng -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.3.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <includeProjectDependencies>true</includeProjectDependencies>
+          <includePluginDependencies>false</includePluginDependencies>
+          <executableDependency>
+            <groupId>com.nuevatel.mcsim.server</groupId>
+            <artifactId>server</artifactId>
+          </executableDependency>
+          <mainClass>com.nuevatel.smppsim.SmscSim</mainClass>
+        </configuration>
+      </plugin>
+      <!-- to generate jar. It is not input Plugins Mng -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <finalName>smpp.sim-smsc-${project.version}</finalName>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>com.nuevatel.smppsim.SmscSim</mainClass>
+            </manifest>
+          </archive>
+          <outputDirectory>../build</outputDirectory>
+        </configuration>
+      </plugin>
+      <!-- generates distributable zip on package phase -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+  
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+      <groupId>com.nuevatel.mcsim</groupId>
+      <artifactId>mc.sim-core</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
+  
 </project>
